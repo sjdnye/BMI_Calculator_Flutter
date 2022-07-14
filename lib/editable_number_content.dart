@@ -12,7 +12,7 @@ class EditableNumber extends StatelessWidget {
   final String label;
   final int number;
   final Function clickedMinus;
-  final clickedPlus;
+  final Function clickedPlus;
 
   @override
   Widget build(BuildContext context) {
