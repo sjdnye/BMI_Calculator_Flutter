@@ -1,7 +1,7 @@
 import 'dart:ffi';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
-import 'constant.dart';
+import 'package:bmi_flutter/component/constant.dart';
 
 class EditableNumber extends StatelessWidget {
   EditableNumber(
@@ -19,10 +19,19 @@ class EditableNumber extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Text(label),
+        Text(
+          label,
+          style: kLabelTextStyle,
+        ),
+        SizedBox(
+          height: 30.0,
+        ),
         Text(
           number.toString(),
           style: kNumberTextStyle,
+        ),
+        SizedBox(
+          height: 30.0,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

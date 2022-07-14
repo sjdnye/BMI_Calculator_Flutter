@@ -1,9 +1,12 @@
-import 'package:bmi_flutter/editable_number_content.dart';
+import 'package:bmi_flutter/component/editable_number_content.dart';
+import 'package:bmi_flutter/screen/result_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:bmi_flutter/reusable_card.dart';
-import 'package:bmi_flutter/icon_content.dart';
-import 'constant.dart';
+import 'package:bmi_flutter/component/reusable_card.dart';
+import 'package:bmi_flutter/component/icon_content.dart';
+import 'package:bmi_flutter/component/constant.dart';
+import 'package:bmi_flutter/screen/result_page.dart';
+import '../component/bottom_button.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({Key? key}) : super(key: key);
@@ -160,17 +163,14 @@ class _InputPageState extends State<InputPage> {
                 ],
               ),
             ),
-            Container(
-              color: kBottomContainerColor,
-              margin: const EdgeInsets.only(top: 10.0),
-              width: double.infinity,
-              height: kBottomContainerHeight,
-              child: Center(
-                child: Text(
-                  "CALCULATE",
-                  style: TextStyle(fontSize: 30.0),
-                ),
-              ),
+            BottomButton(
+              textLabel: "CALCULATE",
+              onPress: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ResultPage()),
+                );
+              },
             ),
           ],
         ),
@@ -180,3 +180,16 @@ class _InputPageState extends State<InputPage> {
 }
 
 enum GenderClass { Male, Female }
+
+class RoundIconButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      onPressed: () {},
+      constraints: BoxConstraints.tightFor(width: 56.0, height: 56.0),
+      shape: CircleBorder(),
+      fillColor: Color(0xff4c4f5e),
+      elevation: 6.0,
+    );
+  }
+}
