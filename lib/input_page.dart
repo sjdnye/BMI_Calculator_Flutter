@@ -1,3 +1,4 @@
+import 'package:bmi_flutter/editable_number_content.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:bmi_flutter/reusable_card.dart';
@@ -14,6 +15,8 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   GenderClass clickedGender = GenderClass.Male;
   int height = 180;
+  int weight = 70;
+  int age = 20;
 
   @override
   Widget build(BuildContext context) {
@@ -85,17 +88,28 @@ class _InputPageState extends State<InputPage> {
                         ),
                       ],
                     ),
-                    Slider(
-                      value: height.toDouble(),
-                      onChanged: (double newValue) {
-                        setState(() {
-                          height = newValue.round().toInt();
-                        });
-                      },
-                      min: 120.0,
-                      max: 220.0,
-                      activeColor: kSliderActiveColor,
-                      inactiveColor: kSliderInActiveColor,
+                    SliderTheme(
+                      data: SliderTheme.of(context).copyWith(
+                          activeTrackColor: Colors.white,
+                          inactiveTrackColor: kSliderInActiveColor,
+                          overlayColor: Color(0x29eb1555),
+                          thumbColor: Color(0xffeb1555),
+                          thumbShape:
+                              RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                          overlayShape:
+                              RoundSliderOverlayShape(overlayRadius: 30.0)),
+                      child: Slider(
+                        value: height.toDouble(),
+                        onChanged: (double newValue) {
+                          setState(
+                            () {
+                              height = newValue.round().toInt();
+                            },
+                          );
+                        },
+                        min: 120.0,
+                        max: 220.0,
+                      ),
                     )
                   ],
                 ),
@@ -109,14 +123,38 @@ class _InputPageState extends State<InputPage> {
                     child: ReusableCard(
                       colour: kActiveCardColor,
                       onPress: () {},
-                      cardChild: Column(),
+                      cardChild: EditableNumber(
+                          label: "WEIGHT",
+                          number: weight,
+                          clickedMinus: () {
+                            setState(() {
+                              weight--;
+                            });
+                          },
+                          clickedPlus: () {
+                            setState(() {
+                              weight++;
+                            });
+                          }),
                     ),
                   ),
                   Expanded(
                     child: ReusableCard(
                       colour: kActiveCardColor,
                       onPress: () {},
-                      cardChild: Column(),
+                      cardChild: EditableNumber(
+                          label: "AGE",
+                          number: age,
+                          clickedMinus: () {
+                            setState(() {
+                              age--;
+                            });
+                          },
+                          clickedPlus: () {
+                            setState(() {
+                              age++;
+                            });
+                          }),
                     ),
                   ),
                 ],
@@ -127,6 +165,12 @@ class _InputPageState extends State<InputPage> {
               margin: const EdgeInsets.only(top: 10.0),
               width: double.infinity,
               height: kBottomContainerHeight,
+              child: Center(
+                child: Text(
+                  "CALCULATE",
+                  style: TextStyle(fontSize: 30.0),
+                ),
+              ),
             ),
           ],
         ),
